@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Prague Transit Demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+
+<body>
+
+<button onclick="toggleTheme()">Toggle Theme</button>
+
+<h1>Prague Transit Route Finder</h1>
+
+<div class="form">
+
+<label>Start Station</label>
+<select id="start">
+  <option>Dejvická</option>
+  <option>Malostranská</option>
+  <option>Muzeum</option>
+  <option>Náměstí Míru</option>
+</select>
+
+<button class="swap-button" onclick="swapStations()">⇄</button>
+
+<label>Destination</label>
+<select id="end">
+  <option>Malostranská</option>
+  <option>Dejvická</option>
+  <option>Muzeum</option>
+  <option>Náměstí Míru</option>
+</select>
+
+<button onclick="findRoute()">Find Route</button>
+
+</div>
+
+<div id="result" class="result"></div>
+<div id="map"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
