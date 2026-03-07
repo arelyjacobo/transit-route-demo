@@ -23,7 +23,7 @@ The app allows users to select two stations and generate a route between them. T
 
 ### Screenshot
 
-![App Screenshot](praha-demo-screenshot.png)
+![Prague Transit Route Demo](assets/images/praha-demo-screenshot.png)
 
 ### Purpose
 
