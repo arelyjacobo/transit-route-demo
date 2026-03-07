@@ -18,12 +18,14 @@ The app allows users to select two stations and generate a route between them. T
 - HTML
 - CSS
 - JavaScript
-- Leaflet.js (for the interactive maps)
+- Leaflet.js (for the interactive map)
 - OpenStreetMap
 
-### Screenshot
+### Visual
 
-![Prague Transit Route Demo](assets/images/praha-demo-screenshot.png)
+Click on the image to go to my homepage. 
+
+![Prague Transit Route Demo](assets/images/praha-demo-screenshot.png)(index.md)
 
 ### Purpose
 
