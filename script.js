@@ -1,5 +1,6 @@
 let routeLine = null;
 let startMarker = null;
+let stopMarkers = [];
 let endMarker = null;
 
 const stations = {
@@ -9,9 +10,37 @@ const stations = {
   "Náměstí Míru": [50.0755, 14.4378]
 };
 
+const metroLineA = [
+  "Dejvická",
+  "Malostranská",
+  "Muzeum",
+  "Náměstí Míru"
+];
+
+function getStationPath(start, end) {
+
+  let startIndex = metroLineA.indexOf(start);
+  let endIndex = metroLineA.indexOf(end);
+
+  if (startIndex === -1 || endIndex === -1) return null;
+
+  if (startIndex <= endIndex) {
+    return metroLineA.slice(startIndex, endIndex + 1);
+  } else {
+    return metroLineA.slice(endIndex, startIndex + 1).reverse();
+  }
+
+}
+
+function getRouteCoordinates(stationPath) {
+
+  return stationPath.map(station => stations[station]);
+
+}
+
 const lineColors = {
-  "A": "#2ca25f",  
-  "tram": "#d73027"
+  "A": "#00A550",  
+  "tram": "#D32F2F"
 };
 
 const routes = {
@@ -91,8 +120,8 @@ function findRoute() {
 
 let resultBox = document.getElementById("result");
 
-let key = [start, end].sort().join("-");
-let data = routes[key];
+let key = `${start}-${end}`;
+let data = routes[key] || routes[`${end}-${start}`];
 
 let color = "#d73027"; // default
 
@@ -106,10 +135,41 @@ if (routeLine) map.removeLayer(routeLine);
 if (startMarker) map.removeLayer(startMarker);
 if (endMarker) map.removeLayer(endMarker);
 
-  // Draw route line
-let curvedRoute = getCurvedRoute(startCoords, endCoords);
+stopMarkers.forEach(marker => map.removeLayer(marker));
+stopMarkers = [];
 
-routeLine = animateRoute(curvedRoute, color);
+  // Draw route line
+let stationPath = getStationPath(start, end);
+
+let routeCoords;
+
+if (stationPath) {
+  routeCoords = getRouteCoordinates(stationPath);
+} else {
+  routeCoords = getCurvedRoute(startCoords, endCoords);
+}
+
+if (stationPath && stationPath.length > 2) {
+
+  for (let i = 1; i < stationPath.length - 1; i++) {
+
+    let coords = stations[stationPath[i]];
+
+    let stop = L.circleMarker(coords, {
+      radius: 4,
+      color: "#ffffff",
+      weight: 1.5,
+      fillColor: color,
+      fillOpacity: 1
+    }).addTo(map);
+
+    stopMarkers.push(stop);
+
+  }
+
+}
+
+routeLine = animateRoute(routeCoords, color);
 map.fitBounds(routeLine.getBounds());
 
   // Add start marker
