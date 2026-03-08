@@ -12,7 +12,7 @@ body {
 
 .dark-mode select {
   background-color: #2d2d2d;
-  color: #ffffff
+  color: #ffffff;
   border: 1px solid #555;
 }
 
@@ -27,7 +27,8 @@ body {
 }
 
 .dark-mode #route-button {
-  background-color: #2d2d2dcolor: white;
+  background-color: #2d2d2d;
+  color: white;
 }
 
 .dark-mode .theme-button {
