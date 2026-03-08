@@ -43,6 +43,44 @@ function toggleTheme() {
   document.body.classList.toggle("dark-mode");
 }
 
+function getCurvedRoute(startCoords, endCoords) {
+
+  let midLat = (startCoords[0] + endCoords[0]) / 2;
+  let midLng = (startCoords[1] + endCoords[1]) / 2;
+
+  midLng += 0.01;
+
+  return [
+    startCoords,
+    [midLat, midLng],
+    endCoords
+  ];
+}
+
+function animateRoute(routeCoords, color) {
+
+  let currentLine = L.polyline([], {
+    color: color,
+    weight: 7,
+    opacity: 0.9,
+    lineCap: "round"
+  }).addTo(map);
+
+  let i = 0;
+
+  function drawNext() {
+    if (i < routeCoords.length) {
+      currentLine.addLatLng(routeCoords[i]);
+      i++;
+      setTimeout(drawNext, 80);
+    }
+  }
+
+  drawNext();
+
+  return currentLine;
+}
+
 function findRoute() {
 
   let start = document.getElementById("start").value;
@@ -51,9 +89,10 @@ function findRoute() {
   let startCoords = stations[start];
   let endCoords = stations[end];
 
-if (routeLine) map.removeLayer(routeLine);
-if (startMarker) map.removeLayer(startMarker);
-if (endMarker) map.removeLayer(endMarker);
+let resultBox = document.getElementById("result");
+
+let key = [start, end].sort().join("-");
+let data = routes[key];
 
 let color = "#d73027"; // default
 
@@ -63,17 +102,15 @@ if (data?.type === "A") {
   color = lineColors["tram"];
 }
 
+if (routeLine) map.removeLayer(routeLine);
+if (startMarker) map.removeLayer(startMarker);
+if (endMarker) map.removeLayer(endMarker);
+
   // Draw route line
-routeLine = L.polyline(
-  [startCoords, endCoords],
-  {
-    color: color,
-    weight: 6,
-    opacity: 0.9,
-    lineCap: "round",
-    dashArray: "10, 10"
-  }
-).addTo(map);
+let curvedRoute = getCurvedRoute(startCoords, endCoords);
+
+routeLine = animateRoute(curvedRoute, color);
+map.fitBounds(routeLine.getBounds());
 
   // Add start marker
   startMarker = L.marker(startCoords)
@@ -89,15 +126,7 @@ routeLine = L.polyline(
   // Zoom map to fit route
   map.fitBounds(routeLine.getBounds());
 
-let key = [start, end].sort().join("-");
-let data = routes[key];
-
-  let route = "";
-  let time = "";
-  let badge = "";
-  let icon = "";
-
-  if (start === end) {
+if (start === end) {
 
   resultBox.innerHTML = `
     <h2>Route Found</h2>
@@ -109,6 +138,11 @@ let data = routes[key];
   return;
 }
 
+  let route = "";
+  let time = "";
+  let badge = "";
+  let icon = "";
+
   if (data) {
     route = data.route;
     time = data.time;
@@ -118,8 +152,6 @@ let data = routes[key];
     route = "No direct route found.";
     time = "N/A";
   }
-
-  let resultBox = document.getElementById("result");
 
   resultBox.innerHTML = `
     <h2>Route Found</h2>
