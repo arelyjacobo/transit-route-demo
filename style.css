@@ -10,6 +10,40 @@ body {
   color: #e0e0e0;
 }
 
+.dark-mode select {
+  background-color: #2d2d2d;
+  color: #ffffff
+  border: 1px solid #555;
+}
+
+.dark-mode button {
+  background: #555;
+  color: white;
+}
+
+.dark-mode .swap-button {
+  background: #555;
+  color: white;
+}
+
+.dark-mode #route-button {
+  background-color: #2d2d2dcolor: white;
+}
+
+.dark-mode .theme-button {
+  background-color: #2d2d2d;
+  color: white;
+}
+
+.dark-mode .result {
+  background-color: #1e1e1e;
+  color: #e5e5e5;
+}
+
+.dark-mode .result h2 {
+  color: #ffffff;
+}
+
 h1 {
   margin-bottom: 20px;
 }
@@ -63,7 +97,6 @@ button:hover {
   margin: 30px auto;
   border-radius: 12px;
 }
-/*Metro badge styling*/
 
 .metro-badge {
   display: inline-block;
@@ -90,8 +123,6 @@ button:hover {
 .lineC {
   background-color: #e31e24;
 }
-
-/* Route text */
 
 .route {
   font-size: 18px;
