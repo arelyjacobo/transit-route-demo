@@ -6,15 +6,16 @@
     body {
         font-family: "Spline Sans", sans-serif
     }
-
+    
     .demo-button {
         display: inline-block;
         padding: 10px 18px;
         background color: #0a9f47;
-        color: white;
+        color: white !important;
         text-decoration: none;
         border-radius: 6px;
         font-weight: 600;
+        margin-top: 10px;
     }
 
     .demo-button:hover {
@@ -33,7 +34,7 @@ A small interactive demo inspired by Prague’s public transportation system.
 
 <p align="center">
 <a href="interface.html">
-<img src="assets/images/praha-demo-screenshot.png" width="600">
+<img src="assets/images/praha-demo-screenshot.png" width="420">
 </a>
 </p>
 
