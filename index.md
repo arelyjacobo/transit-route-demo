@@ -4,14 +4,14 @@ A small interactive demo inspired by Prague’s public transportation system.
 
 <p align="center">
 <a href="interface.html">
-<img src="assets/images/praha-demo-screenshot.png" width="650">
+<img src="assets/images/praha-demo-screenshot.png" width="600">
 </a>
 </p>
 
 ### Live Demo
-
-[Open the Transit Demo](interface.html)
-
+<div class="center">
+<a href="interface.html" class="demo-button">Open Transit Demo</a>
+</div>
 ---
 
 ### Built With
@@ -41,5 +41,4 @@ This project explores frontend interface design for transit systems and map-base
 
 ### Source Code
 
-GitHub Repository:  
-https://github.com/arelyjacobo/transit-route-demo
+[View the GitHub Repository](https://github.com/arelyjacobo/transit-route-demo)
