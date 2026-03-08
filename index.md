@@ -1,16 +1,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300..700&display=swap" rel="stylesheet">
 
 <style>
     body {
-        font-family: "Spline Sans", sans-serif
+        font-family: "Spline Sans", sans-serif;
     }
     
     .demo-button {
         display: inline-block;
         padding: 10px 18px;
-        background color: #0a9f47;
+        background-color: #0a9f47;
         color: white !important;
         text-decoration: none;
         border-radius: 6px;
@@ -19,7 +19,7 @@
     }
 
     .demo-button:hover {
-        background color-color #087c38
+        background-color #087c38
     }
 
     .center {
@@ -33,9 +33,7 @@
 A small interactive demo inspired by Prague’s public transportation system.
 
 <p align="center">
-<a href="interface.html">
 <img src="assets/images/praha-demo-screenshot.png" width="420">
-</a>
 </p>
 
 ### Live Demo
