@@ -2,6 +2,31 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300..700&display=swap" rel="stylesheet">
 
+<style>
+    body {
+        font-family: "Spline Sans", sans-serif
+    }
+
+    .demo-button {
+        display: inline-block;
+        padding: 10px 18px;
+        background color: #0a9f47;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 600;
+    }
+
+    .demo-button:hover {
+        background color-color #087c38
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    </style>
+
 # Prague Transit Route Finder
 
 A small interactive demo inspired by Prague’s public transportation system.
