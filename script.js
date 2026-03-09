@@ -12,8 +12,12 @@ const stations = {
 
 const metroLineA = [
   "Dejvická",
+  "Hradčanská",
   "Malostranská",
+  "Staroměstská",
+  "Můstek",
   "Muzeum",
+  "I.P. Pavlova",
   "Náměstí Míru"
 ];
 
@@ -39,8 +43,7 @@ function getRouteCoordinates(stationPath) {
 }
 
 const lineColors = {
-  "A": "#00A550",  
-  "tram": "#D32F2F"
+  "A": "#00A550"
 };
 
 const routes = {
@@ -53,10 +56,10 @@ const routes = {
   },
 
   "Malostranská-Muzeum": {
-    route: "Tram 22",
-    time: "9 minutes",
+    route: "Metro Line A",
+    time: "5 minutes",
     type: "",
-    icon: "🚋"
+    icon: "🚇"
   },
 
   "Muzeum-Náměstí Míru": {
@@ -123,13 +126,11 @@ let resultBox = document.getElementById("result");
 let key = `${start}-${end}`;
 let data = routes[key] || routes[`${end}-${start}`];
 
-let color = "#d73027"; // default
+let color = "#00A550"; // default
 
 if (data?.type === "A") {
   color = lineColors["A"];
-} else if (data?.icon === "🚋") {
-  color = lineColors["tram"];
-}
+} 
 
 if (routeLine) map.removeLayer(routeLine);
 if (startMarker) map.removeLayer(startMarker);
@@ -156,9 +157,9 @@ if (stationPath && stationPath.length > 2) {
     let coords = stations[stationPath[i]];
 
     let stop = L.circleMarker(coords, {
-      radius: 4,
+      radius: 5,
       color: "#ffffff",
-      weight: 1.5,
+      weight: 2,
       fillColor: color,
       fillOpacity: 1
     }).addTo(map);

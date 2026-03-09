@@ -16,28 +16,25 @@
         border-radius: 6px;
         font-weight: 600;
         margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     .demo-button:hover {
         background-color #087c38
     }
 
-    .center {
-        text-align: center;
-    }
-
     </style>
 
-# Prague Transit Route Finder
+# Visual
 
-A small interactive demo inspired by Prague’s public transportation system.
+An interactive demo inspired by Prague’s public transportation system.
 
 <p align="center">
 <img src="assets/images/praha-demo-screenshot.png" width="420">
 </p>
 
 ### Live Demo
-<div class="center">
+<div class="left">
 <a href="interface.html" class="demo-button">Open Transit Demo</a>
 </div>
 ---
@@ -53,11 +50,15 @@ A small interactive demo inspired by Prague’s public transportation system.
 
 ### Features
 
-- Select start and destination stations
-- Swap stations instantly
-- Interactive map with route visualization
-- Multilingual interface (EN/DE/CS/ES)
-- Theme toggle (light/dark)
+- Select start and destination stations from Prague Metro Line A
+- Swap stations instantly to reverse the route
+- Interactive map built with Leaflet
+- Animated route visualization between stations
+- Metro-style route line with colored transit lines
+- Intermediate station indicators along the route
+- Start and destination markers
+- Multilingual interface (English, Czech, German, Spanish)
+- Light / Dark theme toggle
 
 ---
 
