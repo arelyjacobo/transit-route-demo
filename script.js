@@ -105,6 +105,31 @@ function createCurvedPath(stationPath) {
 
 }
 
+function densifyRoute(coords, segments = 20) {
+
+  let dense = [];
+
+  for (let i = 0; i < coords.length - 1; i++) {
+
+    let start = coords[i];
+    let end = coords[i + 1];
+
+    for (let j = 0; j < segments; j++) {
+
+      let lat = start[0] + (end[0] - start[0]) * (j / segments);
+      let lng = start[1] + (end[1] - start[1]) * (j / segments);
+
+      dense.push([lat, lng]);
+
+    }
+
+  }
+
+  dense.push(coords[coords.length - 1]);
+
+  return dense;
+}
+
 function animateRoute(routeCoords, color) {
 
   let currentLine = L.polyline([], {
@@ -120,7 +145,7 @@ function animateRoute(routeCoords, color) {
     if (i < routeCoords.length) {
       currentLine.addLatLng(routeCoords[i]);
       i++;
-      setTimeout(drawNext, 80);
+      setTimeout(drawNext, 40);
     }
   }
 
@@ -175,6 +200,8 @@ if (stationPath) {
 } else {
   routeCoords = getCurvedRoute(startCoords, endCoords);
 }
+
+routeCoords = densifyRoute(routeCoords);
 
 if (stationPath && stationPath.length > 2) {
 
