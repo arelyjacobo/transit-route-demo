@@ -79,18 +79,30 @@ function toggleTheme() {
   document.body.classList.toggle("dark-mode");
 }
 
-function getCurvedRoute(startCoords, endCoords) {
+function createCurvedPath(stationPath) {
 
-  let midLat = (startCoords[0] + endCoords[0]) / 2;
-  let midLng = (startCoords[1] + endCoords[1]) / 2;
+  let coords = [];
 
-  midLng += 0.01;
+  for (let i = 0; i < stationPath.length - 1; i++) {
 
-  return [
-    startCoords,
-    [midLat, midLng],
-    endCoords
-  ];
+    let start = stations[stationPath[i]];
+    let end = stations[stationPath[i + 1]];
+
+    let midLat = (start[0] + end[0]) / 2;
+    let midLng = (start[1] + end[1]) / 2;
+
+    // small curve offset
+    midLng += 0.003;
+
+    coords.push(start);
+    coords.push([midLat, midLng]);
+
+  }
+
+  coords.push(stations[stationPath[stationPath.length - 1]]);
+
+  return coords;
+
 }
 
 function animateRoute(routeCoords, color) {
@@ -149,7 +161,7 @@ let stationPath = getStationPath(start, end);
 let routeCoords;
 
 if (stationPath) {
-  routeCoords = getRouteCoordinates(stationPath);
+  routeCoords = createCurvedPath(stationPath);
 } else {
   routeCoords = getCurvedRoute(startCoords, endCoords);
 }
@@ -175,7 +187,6 @@ if (stationPath && stationPath.length > 2) {
 }
 
 routeLine = animateRoute(routeCoords, color);
-map.fitBounds(routeLine.getBounds());
 
   // Add start marker
   startMarker = L.marker(startCoords)
