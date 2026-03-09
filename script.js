@@ -68,6 +68,7 @@ function changeLanguage() {
   let lang = getCurrentLanguage();
   let t = translations[lang];
 
+  document.getElementById("title").textContent = t.title;
   document.getElementById("start-label").textContent = t.start;
   document.getElementById("destination-label").textContent = t.destination;
   document.getElementById("find-button").textContent = t.find;
