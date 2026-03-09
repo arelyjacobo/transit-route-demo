@@ -223,12 +223,6 @@ function findRoute() {
 
 let resultBox = document.getElementById("result");
 
-let color = "#00A550"; // default
-
-if (data?.type === "A") {
-  color = lineColors["A"];
-} 
-
 if (routeLine) map.removeLayer(routeLine);
 if (startMarker) map.removeLayer(startMarker);
 if (endMarker) map.removeLayer(endMarker);
@@ -239,7 +233,6 @@ stopMarkers = [];
   // Draw route line
 let stationPath = getStationPath(start, end);
 
-
 let data = null;
 
 if (stationPath) {
@@ -249,6 +242,12 @@ if (stationPath) {
     type: "A",
     icon: "🚇"
   };
+}
+
+let color = "#00A550"; // default
+
+if (data && data.type === "A") {
+  color = lineColors["A"];
 }
 
 let routeCoords;
@@ -299,13 +298,14 @@ routeLine = animateRoute(routeCoords, color);
 
 if (start === end) {
 
-  resultBox.innerHTML = `
-    <h2>Route Found</h2>
+  let lang = translations[getCurrentLanguage()];
+
+    resultBox.innerHTML = `
+    <h2>${lang.routeFound}</h2>
     <p class="stations"><strong>${start}</strong></p>
-    let lang = translations[getCurrentLanguage()];
-      <p class="route">${lang.already}</p>
-      <p class="time">${lang.estimated}: 0 minutes</p>
-  `;
+    <p class="route">${lang.already}</p>
+    <p class="time">${lang.estimated}: 0 minutes</p>
+`;
 
   return;
 }

@@ -16,8 +16,6 @@
 
 <h1>Prague Transit Route Finder</h1>
 
-<button id="find-button" onclick="findRoute()">Find Route</button>
-
 <select id="language" onchange="changeLanguage()">
   <option selected>Čeština</option>
   <option>English</option>
@@ -29,7 +27,7 @@
 
 <div class="form">
 
-<label>Start Station</label>
+<label id="start-label">Start Station</label>
 <select id="start">
   <option></option>
   <option>Dejvická</option>
@@ -40,7 +38,7 @@
 
 <button class="swap-button" onclick="swapStations()">⇄</button>
 
-<label>Destination</label>
+<label id="destination-label">Destination</label>
 <select id="end">
   <option></option>
   <option>Dejvická</option>
@@ -49,7 +47,7 @@
   <option>Náměstí Míru</option>
 </select>
 
-<button onclick="findRoute()">Find Route</button>
+<button id="find-button" onclick="findRoute()">Find Route</button>
 
 </div>
 
