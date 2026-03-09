@@ -3,6 +3,65 @@ let startMarker = null;
 let stopMarkers = [];
 let endMarker = null;
 
+const translations = {
+
+  English: {
+    start: "Start Station",
+    destination: "Destination",
+    find: "Find Route",
+    routeFound: "Route Found",
+    estimated: "Estimated time",
+    already: "You are already at this station.",
+    noRoute: "No direct route found."
+  },
+
+  Deutsch: {
+    start: "Startbahnhof",
+    destination: "Zielbahnhof",
+    find: "Route finden",
+    routeFound: "Route gefunden",
+    estimated: "Geschätzte Zeit",
+    already: "Sie befinden sich bereits an dieser Station.",
+    noRoute: "Keine direkte Route gefunden."
+  },
+
+  "Čeština": {
+    start: "Výchozí stanice",
+    destination: "Cílová stanice",
+    find: "Najít trasu",
+    routeFound: "Trasa nalezena",
+    estimated: "Odhadovaný čas",
+    already: "Již jste na této stanici.",
+    noRoute: "Žádná přímá trasa nenalezena."
+  },
+
+  Español: {
+    start: "Estación inicial",
+    destination: "Destino",
+    find: "Buscar ruta",
+    routeFound: "Ruta encontrada",
+    estimated: "Tiempo estimado",
+    already: "Ya estás en esta estación.",
+    noRoute: "No se encontró ruta directa."
+  }
+
+};
+
+function getCurrentLanguage() {
+  return document.getElementById("language").value;
+}
+
+function changeLanguage() {
+
+  let lang = document.getElementById("language").value;
+  let t = translations[lang];
+
+  document.getElementById("start-label").textContent = t.start;
+  document.getElementById("destination-label").textContent = t.destination;
+  document.getElementById("find-button").textContent = t.find;
+
+}
+
 const stations = {
   "Dejvická": [50.1007, 14.3935],
   "Hradčanská": [50.0972, 14.4044],
@@ -164,17 +223,6 @@ function findRoute() {
 
 let resultBox = document.getElementById("result");
 
-let data = null;
-
-if (stationPath) {
-  data = {
-    route: "Metro Line A",
-    time: `${(stationPath.length - 1) * 2} minutes`,
-    type: "A",
-    icon: "🚇"
-  };
-}
-
 let color = "#00A550"; // default
 
 if (data?.type === "A") {
@@ -190,6 +238,18 @@ stopMarkers = [];
 
   // Draw route line
 let stationPath = getStationPath(start, end);
+
+
+let data = null;
+
+if (stationPath) {
+  data = {
+    route: "Metro Line A",
+    time: `${(stationPath.length - 1) * 2} minutes`,
+    type: "A",
+    icon: "🚇"
+  };
+}
 
 let routeCoords;
 
@@ -242,8 +302,9 @@ if (start === end) {
   resultBox.innerHTML = `
     <h2>Route Found</h2>
     <p class="stations"><strong>${start}</strong></p>
-    <p class="route">You are already at this station.</p>
-    <p class="time">Estimated time: 0 minutes</p>
+    let lang = translations[getCurrentLanguage()];
+      <p class="route">${lang.already}</p>
+      <p class="time">${lang.estimated}: 0 minutes</p>
   `;
 
   return;
@@ -260,12 +321,13 @@ if (start === end) {
     badge = `<span class="metro-badge line${data.type}">${data.type}</span>`;
     icon = `<span class="icon">${data.icon}</span>`;
   } else {
-    route = "No direct route found.";
-    time = "N/A";
+    let lang = translations[getCurrentLanguage()];
+      route = lang.noRoute;
+      time = "N/A";
   }
 
   resultBox.innerHTML = `
-    <h2>Route Found</h2>
+    <h2>${translations[getCurrentLanguage()].routeFound}</h2>
     <p class="stations"><strong>${start}</strong> → <strong>${end}</strong></p>
     <p class="route">${icon} ${badge} ${route}</p>
     <p class="time">Estimated time: ${time}</p>
@@ -290,3 +352,7 @@ function swapStations() {
   endSelect.value = temp;
 
 }
+
+window.onload = function () {
+  changeLanguage();
+};

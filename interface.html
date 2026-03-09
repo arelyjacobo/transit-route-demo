@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="cs">
 
 <head>
   <title>Prague Transit Demo</title>
@@ -16,10 +16,12 @@
 
 <h1>Prague Transit Route Finder</h1>
 
-<select id="language">
+<button id="find-button" onclick="findRoute()">Find Route</button>
+
+<select id="language" onchange="changeLanguage()">
+  <option selected>Čeština</option>
   <option>English</option>
   <option>Deutsch</option>
-  <option>Čeština</option>
   <option>Español</option>
 </select>
 
