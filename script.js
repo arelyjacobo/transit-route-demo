@@ -62,7 +62,7 @@ const routes = {
   "Malostranská-Muzeum": {
     route: "Metro Line A",
     time: "5 minutes",
-    type: "",
+    type: "A",
     icon: "🚇"
   },
 
@@ -139,8 +139,18 @@ function findRoute() {
 
 let resultBox = document.getElementById("result");
 
-let key = `${start}-${end}`;
-let data = routes[key] || routes[`${end}-${start}`];
+let stationPath = getStationPath(start, end);
+
+let data = null;
+
+if (stationPath) {
+  data = {
+    route: "Metro Line A",
+    time: `${(stationPath.length - 1) * 2} minutes`,
+    type: "A",
+    icon: "🚇"
+  };
+}
 
 let color = "#00A550"; // default
 
@@ -254,5 +264,4 @@ function swapStations() {
   startSelect.value = endSelect.value;
   endSelect.value = temp;
 
-  findRoute();
 }
