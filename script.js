@@ -1,7 +1,6 @@
 let routeLine = null;
 let startMarker = null;
 let stopMarkers = [];
-let endMarker = null;
 
 const translations = {
 
@@ -12,7 +11,9 @@ const translations = {
     routeFound: "Route Found",
     estimated: "Estimated time",
     already: "You are already at this station.",
-    noRoute: "No direct route found."
+    noRoute: "No direct route found.",
+    startMarkerText: "Start",
+    endMarkerText: "Destination"
   },
 
   Deutsch: {
@@ -22,7 +23,9 @@ const translations = {
     routeFound: "Route gefunden",
     estimated: "Geschätzte Zeit",
     already: "Sie befinden sich bereits an dieser Station.",
-    noRoute: "Keine direkte Route gefunden."
+    noRoute: "Keine direkte Route gefunden.",
+    startMarkerText: "Start",
+      endMarkerText: "Ziel",
   },
 
   "Čeština": {
@@ -32,7 +35,9 @@ const translations = {
     routeFound: "Trasa nalezena",
     estimated: "Odhadovaný čas",
     already: "Již jste na této stanici.",
-    noRoute: "Žádná přímá trasa nenalezena."
+    noRoute: "Žádná přímá trasa nenalezena.",
+    startMarkerText: "Start",
+    endMarkerText: "Cíl"
   },
 
   Español: {
@@ -42,7 +47,9 @@ const translations = {
     routeFound: "Ruta encontrada",
     estimated: "Tiempo estimado",
     already: "Ya estás en esta estación.",
-    noRoute: "No se encontró ruta directa."
+    noRoute: "No se encontró ruta directa.",
+    startMarkerText: "Inicio",
+    endMarkerText: "Destino"
   }
 
 };
@@ -107,31 +114,6 @@ function getRouteCoordinates(stationPath) {
 
 const lineColors = {
   "A": "#00A550"
-};
-
-const routes = {
-
-  "Dejvická-Malostranská": {
-    route: "Metro Line A",
-    time: "3 minutes",
-    type: "A",
-    icon: "🚇"
-  },
-
-  "Malostranská-Muzeum": {
-    route: "Metro Line A",
-    time: "5 minutes",
-    type: "A",
-    icon: "🚇"
-  },
-
-  "Muzeum-Náměstí Míru": {
-    route: "Metro Line A",
-    time: "1 minute",
-    type: "A",
-    icon: "🚇"
-  }
-
 };
 
 function toggleTheme() {
@@ -215,8 +197,14 @@ function animateRoute(routeCoords, color) {
 
 function findRoute() {
 
+  let lang = translations[getCurrentLanguage()];
   let start = document.getElementById("start").value;
   let end = document.getElementById("end").value;
+
+  if (!start || !end) {
+  alert("Please select both stations.");
+  return;
+}
 
   let startCoords = stations[start];
   let endCoords = stations[end];
@@ -238,7 +226,7 @@ let data = null;
 if (stationPath) {
   data = {
     route: "Metro Line A",
-    time: `${(stationPath.length - 1) * 2} minutes`,
+    time: "${(stationPath.length - 1) * 2}",
     type: "A",
     icon: "🚇"
   };
@@ -283,28 +271,26 @@ if (stationPath && stationPath.length > 2) {
 routeLine = animateRoute(routeCoords, color);
 
   // Add start marker
-  startMarker = L.marker(startCoords)
-    .addTo(map)
-    .bindPopup("Start: " + start)
-    .openPopup();
+startMarker = L.marker(startCoords)
+  .addTo(map)
+  .bindPopup(lang.startMarkerText + ": " + start)
+  .openPopup();
 
-  // Add end marker
-  endMarker = L.marker(endCoords)
-    .addTo(map)
-    .bindPopup("Destination: " + end);
+// Add end marker
+endMarker = L.marker(endCoords)
+  .addTo(map)
+  .bindPopup(lang.endMarkerText + ": " + end);
 
   // Zoom map to fit route
   map.fitBounds(routeLine.getBounds());
 
 if (start === end) {
 
-  let lang = translations[getCurrentLanguage()];
-
     resultBox.innerHTML = `
     <h2>${lang.routeFound}</h2>
     <p class="stations"><strong>${start}</strong></p>
     <p class="route">${lang.already}</p>
-    <p class="time">${lang.estimated}: 0 minutes</p>
+    <p class="time">${lang.estimated}: 0 ${getMinuteWord(time)}</p>
 `;
 
   return;
@@ -321,7 +307,6 @@ if (start === end) {
     badge = `<span class="metro-badge line${data.type}">${data.type}</span>`;
     icon = `<span class="icon">${data.icon}</span>`;
   } else {
-    let lang = translations[getCurrentLanguage()];
       route = lang.noRoute;
       time = "N/A";
   }
@@ -330,7 +315,7 @@ if (start === end) {
     <h2>${translations[getCurrentLanguage()].routeFound}</h2>
     <p class="stations"><strong>${start}</strong> → <strong>${end}</strong></p>
     <p class="route">${icon} ${badge} ${route}</p>
-    <p class="time">Estimated time: ${time}</p>
+    <p class="time">${lang.estimated}: ${time} ${getMinuteWord(time)}</p>
   `;
 
   resultBox.classList.add("show");
@@ -351,6 +336,17 @@ function swapStations() {
   startSelect.value = endSelect.value;
   endSelect.value = temp;
 
+}
+
+function getMinuteWord(time) {
+
+  const lang = getCurrentLanguage();
+
+  if (lang === "Deutsch") return "Minuten";
+  if (lang === "English") return "minutes";
+  if (lang === "Español") return "minutos";
+
+  return "minut"; // Čeština default
 }
 
 window.onload = function () {
