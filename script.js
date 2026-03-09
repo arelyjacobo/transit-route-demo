@@ -97,7 +97,7 @@ function animateRoute(routeCoords, color) {
 
   let currentLine = L.polyline([], {
     color: color,
-    weight: 7,
+    weight: 6,
     opacity: 0.9,
     lineCap: "round"
   }).addTo(map);
