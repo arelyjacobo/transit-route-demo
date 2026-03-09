@@ -32,9 +32,18 @@
 </p>
 
 ### Live Demo
+
+Open the interactive route demo:
+
 <div class="left">
 <a href="interface.html" class="demo-button">Open Transit Demo</a>
 </div>
+
+---
+
+### Source Code
+
+[View the GitHub Repository](https://github.com/arelyjacobo/transit-route-demo)
 
 ---
 
@@ -44,6 +53,7 @@
 - CSS
 - JavaScript
 - Leaflet Maps
+- OpenStreetMap
 
 ---
 
@@ -64,10 +74,6 @@
 
 ### Purpose
 
-This project explores frontend interface design for transit systems and map-based navigation tools inspired by Prague's public transportation network.
+This project explores frontend interface design for transit systems and map-based navigation tools inspired by Prague’s public transportation network.
 
----
-
-### Source Code
-
-[View the GitHub Repository](https://github.com/arelyjacobo/transit-route-demo)
+The demo combines interactive mapping, route visualization, and multilingual UI design in a lightweight web application.
