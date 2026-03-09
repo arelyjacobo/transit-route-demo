@@ -13,7 +13,8 @@ const translations = {
     already: "You are already at this station.",
     noRoute: "No direct route found.",
     startMarkerText: "Start",
-    endMarkerText: "Destination"
+    endMarkerText: "Destination",
+    title: "Prague Transit Route Finder",
   },
 
   Deutsch: {
@@ -25,7 +26,8 @@ const translations = {
     already: "Sie befinden sich bereits an dieser Station.",
     noRoute: "Keine direkte Route gefunden.",
     startMarkerText: "Start",
-      endMarkerText: "Ziel",
+    endMarkerText: "Ziel",
+    title: "Prager Nahverkehrs-Routenfinder",
   },
 
   "Čeština": {
@@ -37,7 +39,8 @@ const translations = {
     already: "Již jste na této stanici.",
     noRoute: "Žádná přímá trasa nenalezena.",
     startMarkerText: "Start",
-    endMarkerText: "Cíl"
+    endMarkerText: "Cíl",
+    title: "Vyhledávač tras pražské MHD",
   },
 
   Español: {
@@ -49,7 +52,8 @@ const translations = {
     already: "Ya estás en esta estación.",
     noRoute: "No se encontró ruta directa.",
     startMarkerText: "Inicio",
-    endMarkerText: "Destino"
+    endMarkerText: "Destino",
+    title: "Buscador de rutas de tránsito en Praga",
   }
 
 };
@@ -60,12 +64,16 @@ function getCurrentLanguage() {
 
 function changeLanguage() {
 
-  let lang = document.getElementById("language").value;
+  let lang = getCurrentLanguage();
   let t = translations[lang];
 
   document.getElementById("start-label").textContent = t.start;
   document.getElementById("destination-label").textContent = t.destination;
   document.getElementById("find-button").textContent = t.find;
+
+  if (document.getElementById("result").classList.contains("show")) {
+    findRoute();
+  }
 
 }
 
