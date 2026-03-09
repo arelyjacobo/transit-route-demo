@@ -16,6 +16,7 @@ const translations = {
     startMarkerText: "Start",
     endMarkerText: "Destination",
     title: "Prague Transit Route Finder",
+    metroA: "Metro Line A"
   },
 
   Deutsch: {
@@ -29,6 +30,7 @@ const translations = {
     startMarkerText: "Start",
     endMarkerText: "Ziel",
     title: "Prager Nahverkehrs-Routenfinder",
+    metroA: "Metrolinie A"
   },
 
   "Čeština": {
@@ -42,6 +44,7 @@ const translations = {
     startMarkerText: "Start",
     endMarkerText: "Cíl",
     title: "Vyhledávač tras pražské MHD",
+    metroA: "Linka A metra"
   },
 
   Español: {
@@ -55,6 +58,7 @@ const translations = {
     startMarkerText: "Inicio",
     endMarkerText: "Destino",
     title: "Buscador de rutas de tránsito en Praga",
+    metroA: "Línea A del metro"
   }
 
 };
@@ -254,7 +258,7 @@ if (start === end) {
 
   if (stationPath) {
     data = {
-      route: "Metro Line A",
+      route: lang.metroA,
       time: (stationPath.length - 1) * 2,
       type: "A",
       icon: "🚇"
