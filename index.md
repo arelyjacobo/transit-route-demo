@@ -27,8 +27,6 @@
 
 # Visual
 
-An interactive demo inspired by Prague’s public transportation system.
-
 <p align="center">
 <img src="assets/images/praha-demo-screenshot.png" width="420">
 </p>
@@ -37,6 +35,7 @@ An interactive demo inspired by Prague’s public transportation system.
 <div class="left">
 <a href="interface.html" class="demo-button">Open Transit Demo</a>
 </div>
+
 ---
 
 ### Built With
@@ -50,13 +49,16 @@ An interactive demo inspired by Prague’s public transportation system.
 
 ### Features
 
+### Features
+
 - Select start and destination stations from Prague Metro Line A
-- Swap stations instantly to reverse the route
-- Interactive map built with Leaflet
-- Animated route visualization between stations
-- Metro-style route line with colored transit lines
-- Intermediate station indicators along the route
-- Start and destination markers
+- Swap stations to quickly reverse the route
+- Interactive map displaying the metro route across Prague
+- Smooth animated route visualization along the line
+- Intermediate station indicators between stops
+- Metro-style colored route line
+- Start and destination markers on the map
+- Automatic travel time estimation between stations
 - Multilingual interface (English, Czech, German, Spanish)
 - Light / Dark theme toggle
 

@@ -164,8 +164,6 @@ function findRoute() {
 
 let resultBox = document.getElementById("result");
 
-let stationPath = getStationPath(start, end);
-
 let data = null;
 
 if (stationPath) {
@@ -198,7 +196,7 @@ let routeCoords;
 if (stationPath) {
   routeCoords = createCurvedPath(stationPath);
 } else {
-  routeCoords = getCurvedRoute(startCoords, endCoords);
+  routeCoords = [startCoords, endCoords];
 }
 
 routeCoords = densifyRoute(routeCoords);
