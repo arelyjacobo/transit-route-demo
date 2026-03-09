@@ -6,12 +6,14 @@ The app allows users to select two stations and generate a route between them. T
 
 ### Features
 
-- Select start and destination stations from Prague transit stops
-- Route line and station markers
-- Swap stations
-- Interactive map using Leaflet
-- Multilingual interface 
-- Light/Dark theme
+- Interactive route finder for selected Prague metro stations
+- Dynamic route visualization on an interactive Leaflet map
+- Animated metro-style route rendering
+- Intermediate station indicators along the route
+- Start and destination station markers
+- Station swap feature to instantly reverse routes
+- Multilingual interface (English, Czech, German, Spanish)
+- Light and dark theme toggle
 
 ### Technologies
 
