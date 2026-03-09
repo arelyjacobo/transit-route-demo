@@ -34,7 +34,6 @@
 ### Live Demo
 
 Open the interactive route demo:
-
 <div class="left">
 <a href="interface.html" class="demo-button">Open Transit Demo</a>
 </div>
