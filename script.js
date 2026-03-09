@@ -234,7 +234,7 @@ let data = null;
 if (stationPath) {
   data = {
     route: "Metro Line A",
-    time: "${(stationPath.length - 1) * 2}",
+    time: (stationPath.length - 1) * 2,
     type: "A",
     icon: "🚇"
   };
@@ -322,7 +322,7 @@ if (start === end) {
   }
 
   resultBox.innerHTML = `
-    <h2>${translations[getCurrentLanguage()].routeFound}</h2>
+    <h2>${lang.routeFound}</h2>
     <p class="stations"><strong>${start}</strong> → <strong>${end}</strong></p>
     <p class="route">${icon} ${badge} ${route}</p>
     <p class="time">${lang.estimated}: ${time} ${getMinuteWord(time)}</p>
