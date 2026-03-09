@@ -1,5 +1,6 @@
 let routeLine = null;
 let startMarker = null;
+let endMarker = null;
 let stopMarkers = [];
 
 const translations = {
@@ -226,85 +227,87 @@ if (endMarker) map.removeLayer(endMarker);
 stopMarkers.forEach(marker => map.removeLayer(marker));
 stopMarkers = [];
 
-  // Draw route line
-let stationPath = getStationPath(start, end);
+if (start === end) {
 
-let data = null;
+    map.setView(startCoords, 15);
 
-if (stationPath) {
-  data = {
-    route: "Metro Line A",
-    time: (stationPath.length - 1) * 2,
-    type: "A",
-    icon: "🚇"
-  };
-}
+    startMarker = L.marker(startCoords)
+      .addTo(map)
+      .bindPopup(lang.startMarkerText + ": " + start)
+      .openPopup();
 
-let color = "#00A550"; // default
+    resultBox.innerHTML = `
+      <h2>${lang.routeFound}</h2>
+      <p class="stations"><strong>${start}</strong></p>
+      <p class="route">${lang.already}</p>
+      <p class="time">${lang.estimated}: 0 ${getMinuteWord(0)}</p>
+    `;
 
-if (data && data.type === "A") {
-  color = lineColors["A"];
-}
+    resultBox.classList.add("show");
+    return;
+  }
 
-let routeCoords;
+  let stationPath = getStationPath(start, end);
 
-if (stationPath) {
-  routeCoords = createCurvedPath(stationPath);
-} else {
-  routeCoords = [startCoords, endCoords];
-}
+  let data = null;
 
-routeCoords = densifyRoute(routeCoords);
+  if (stationPath) {
+    data = {
+      route: "Metro Line A",
+      time: (stationPath.length - 1) * 2,
+      type: "A",
+      icon: "🚇"
+    };
+  }
 
-if (stationPath && stationPath.length > 2) {
+  let color = "#00A550";
 
-  for (let i = 1; i < stationPath.length - 1; i++) {
+  if (data && data.type === "A") {
+    color = lineColors["A"];
+  }
 
-    let coords = stations[stationPath[i]];
+  let routeCoords;
 
-    let stop = L.circleMarker(coords, {
-      radius: 5,
-      color: "#ffffff",
-      weight: 2,
-      fillColor: color,
-      fillOpacity: 1
-    }).addTo(map);
+  if (stationPath) {
+    routeCoords = createCurvedPath(stationPath);
+  } else {
+    routeCoords = [startCoords, endCoords];
+  }
 
-    stopMarkers.push(stop);
+  routeCoords = densifyRoute(routeCoords);
+
+  if (stationPath && stationPath.length > 2) {
+
+    for (let i = 1; i < stationPath.length - 1; i++) {
+
+      let coords = stations[stationPath[i]];
+
+      let stop = L.circleMarker(coords, {
+        radius: 5,
+        color: "#ffffff",
+        weight: 2,
+        fillColor: color,
+        fillOpacity: 1
+      }).addTo(map);
+
+      stopMarkers.push(stop);
+
+    }
 
   }
 
-}
-
-routeLine = animateRoute(routeCoords, color);
-
-  // Add start marker
+  routeLine = animateRoute(routeCoords, color);
 startMarker = L.marker(startCoords)
-  .addTo(map)
-  .bindPopup(lang.startMarkerText + ": " + start)
-  .openPopup();
+    .addTo(map)
+    .bindPopup(lang.startMarkerText + ": " + start)
+    .openPopup();
 
-// Add end marker
-endMarker = L.marker(endCoords)
-  .addTo(map)
-  .bindPopup(lang.endMarkerText + ": " + end);
+  /* END MARKER */
+  endMarker = L.marker(endCoords)
+    .addTo(map)
+    .bindPopup(lang.endMarkerText + ": " + end);
 
-  // Zoom map to fit route
   map.fitBounds(routeLine.getBounds());
-
-if (start === end) {
-
-  resultBox.innerHTML = `
-    <h2>${lang.routeFound}</h2>
-    <p class="stations"><strong>${start}</strong></p>
-    <p class="route">${lang.already}</p>
-    <p class="time">${lang.estimated}: 0 ${getMinuteWord(0)}</p>
-  `;
-
-  resultBox.classList.add("show");
-
-  return;
-}
 
   let route = "";
   let time = "";
@@ -317,8 +320,8 @@ if (start === end) {
     badge = `<span class="metro-badge line${data.type}">${data.type}</span>`;
     icon = `<span class="icon">${data.icon}</span>`;
   } else {
-      route = lang.noRoute;
-      time = "N/A";
+    route = lang.noRoute;
+    time = "N/A";
   }
 
   resultBox.innerHTML = `
@@ -329,6 +332,7 @@ if (start === end) {
   `;
 
   resultBox.classList.add("show");
+
 }
 
 let map = L.map('map').setView([50.0755, 14.4378], 12);
