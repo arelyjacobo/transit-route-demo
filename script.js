@@ -5,8 +5,12 @@ let endMarker = null;
 
 const stations = {
   "Dejvická": [50.1007, 14.3935],
+  "Hradčanská": [50.0972, 14.4044],
   "Malostranská": [50.0880, 14.4045],
+  "Staroměstská": [50.0870, 14.4177],
+  "Můstek": [50.0830, 14.4233],
   "Muzeum": [50.0797, 14.4300],
+  "I.P. Pavlova": [50.0753, 14.4308],
   "Náměstí Míru": [50.0755, 14.4378]
 };
 
