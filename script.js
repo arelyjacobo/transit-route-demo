@@ -36,7 +36,7 @@ const translations = {
     find: "Najít trasu",
     routeFound: "Trasa nalezena",
     estimated: "Odhadovaný čas",
-    already: "Již jste na této stanici.",
+    already: "Již jste v této stanici.",
     noRoute: "Žádná přímá trasa nenalezena.",
     startMarkerText: "Start",
     endMarkerText: "Cíl",
@@ -294,12 +294,14 @@ endMarker = L.marker(endCoords)
 
 if (start === end) {
 
-    resultBox.innerHTML = `
+  resultBox.innerHTML = `
     <h2>${lang.routeFound}</h2>
     <p class="stations"><strong>${start}</strong></p>
     <p class="route">${lang.already}</p>
-    <p class="time">${lang.estimated}: 0 ${getMinuteWord(time)}</p>
-`;
+    <p class="time">${lang.estimated}: 0 ${getMinuteWord(0)}</p>
+  `;
+
+  resultBox.classList.add("show");
 
   return;
 }
