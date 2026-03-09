@@ -49,8 +49,6 @@
 
 ### Features
 
-### Features
-
 - Select start and destination stations from Prague Metro Line A
 - Swap stations to quickly reverse the route
 - Interactive map displaying the metro route across Prague
